@@ -57,11 +57,22 @@ def fraudlens_pipeline(df, reviews):
 def load_reviews_from_json(json_path):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    reviews = [r['Review'] for r in data.get("Reviews", []) if r.get("Review") and r['Review'].lower() != "no review text"]
-    if 'About' in data:
-        reviews.append(data['About'])
-    if isinstance(data.get('Recommendation'), str):
-        reviews.append(data['Recommendation'])
+
+    reviews = []
+    for r in data.get("Reviews", []):
+        review = r.get("Review")
+        if isinstance(review, str) and review.lower() != "no review text":
+            reviews.append(review)
+
+    # Safely append About and Recommendation only if they're strings
+    about = data.get("About")
+    if isinstance(about, str):
+        reviews.append(about)
+
+    recommendation = data.get("Recommendation")
+    if isinstance(recommendation, str):
+        reviews.append(recommendation)
+
     return reviews
 
 url = st.text_input("Paste a Facebook Page URL to scan:")
@@ -105,6 +116,16 @@ if st.button("Load and Analyze") and url:
             y='Ratio'
         ).properties(width=500)
         st.altair_chart(bar)
+
+        st.subheader("🛡️ Trust Score Distribution")
+        trust_chart = alt.Chart(results).mark_bar().encode(
+            x=alt.X('Trust_Score', bin=alt.Bin(maxbins=20), title="Trust Score"),
+            y=alt.Y('count()', title="Number of Posts")
+        ).properties(
+            width=600,
+            height=300
+        )
+        st.altair_chart(trust_chart)
 
         st.subheader("📊 Suspicious Post Table")
         st.dataframe(results[results['Fraud_Prediction'] == 1][[

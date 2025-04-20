@@ -1,4 +1,4 @@
-# scraper.py (Improved with dynamic tab navigation and unified dataset saving)
+# scraper.py (Improved with dynamic tab navigation and deep scroll scraping)
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -23,7 +23,6 @@ def navigate_to_tab(driver, tab_name):
         tab_xpath = f"//a[.//span[contains(text(), '{tab_name}')]]"
         tab_elements = driver.find_elements(By.XPATH, tab_xpath)
         if tab_elements:
-            print(f"✅ Found '{tab_name}' tab in main navigation. Clicking...")
             driver.execute_script("arguments[0].click();", tab_elements[0])
             time.sleep(5)
             return True
@@ -35,11 +34,9 @@ def navigate_to_tab(driver, tab_name):
             time.sleep(2)
             tab_elements = driver.find_elements(By.XPATH, tab_xpath)
             if tab_elements:
-                print(f"✅ Found '{tab_name}' tab inside 'More'. Clicking...")
                 driver.execute_script("arguments[0].click();", tab_elements[0])
                 time.sleep(5)
                 return True
-        print(f"❌ '{tab_name}' tab is NOT available on this page.")
         return False
     except Exception as e:
         print(f"⚠️ Error navigating to '{tab_name}': {e}")
@@ -73,12 +70,45 @@ def scrape_facebook_page(page_url):
 
     driver.get(page_url)
     time.sleep(5)
-    for _ in range(3):
+
+    # Deep scroll to load more posts
+    MAX_SCROLLS = 15
+    SCROLL_PAUSE_TIME = 3
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    for i in range(MAX_SCROLLS):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(2)
+        time.sleep(SCROLL_PAUSE_TIME)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            print(f"✅ Scrolling finished after {i+1} iterations.")
+            break
+        last_height = new_height
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
     full_posts = soup.find_all("div", class_="x1n2onr6 x1ja2u2z x1jx94hy x1qpq9i9 xdney7k xu5ydu1 xt3gfkd x9f619 xh8yej3 x6ikm8r x10wlt62 xquyuld")
+    recommendation_text = "not available"
+    try:
+        soup_about = BeautifulSoup(driver.page_source, "html.parser")
+        recommendation_container = soup_about.find_all("div", class_="x9f619 x1n2onr6 x1ja2u2z x78zum5 xdt5ytf x193iq5w xeuugli x1r8uery x1iyjqo2 xs83m0k xsyo7zv x16hj40l x10b6aqq x1yrsyyn")
+        recommendation_span = None
+
+        for block in recommendation_container:
+            span_candidates = block.find_all("span")
+            for span in span_candidates:
+                text = span.get_text(strip=True)
+                if "recommend" in text.lower():
+                    recommendation_text = text
+                    recommendation_span = span
+                    break
+            if recommendation_span:
+                break
+
+        if recommendation_span:
+            print(f"✅ Extracted Recommendation: {recommendation_text}")
+        else:
+            print("⚠️ No recommendation span found.")
+    except Exception as e:
+        print(f"⚠️ Error extracting recommendation text: {e}")
 
     scraped_posts = []
     for post in full_posts:
@@ -109,7 +139,8 @@ def scrape_facebook_page(page_url):
 
         timestamp = "Unknown"
         try:
-            time_element = post.find("abbr")
+            time_element = post.find("div", class_="html-span xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1hl2dhg x16tdsg8 x1vvkbs x4k7w5x x1h91t0o x1h9r5lt x1jfb8zj xv2umb2 x1beo9mf xaigb6o x12ejxvf x3igimt xarpa2k xedcshv x1lytzrv x1t2pt76 x7ja8zs x1qrby5j")
+            print(f"time_element: {time_element}")
             if time_element and time_element.has_attr("data-utime"):
                 timestamp = datetime.fromtimestamp(int(time_element["data-utime"])).isoformat()
         except:
@@ -122,42 +153,126 @@ def scrape_facebook_page(page_url):
             "Timestamp": timestamp
         })
 
+    # About info
     about_text = ""
     if navigate_to_tab(driver, "About"):
+    # Only scroll and wait if the tab is available
+        time.sleep(3)
+        for _ in range(2):
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(SCROLL_PAUSE_TIME)
+        
+        soup_about = BeautifulSoup(driver.page_source, "html.parser")
+        about_data = {}
         try:
-            about_soup = BeautifulSoup(driver.page_source, "html.parser")
-            about_section = about_soup.find("div", {"class": "x1iyjqo2 x78zum5 x1n2onr6"})
-            if about_section:
-                about_text = about_section.get_text(separator=" ", strip=True)
-        except Exception as e:
-            print(f"⚠️ Error extracting About info: {e}")
+            # Extract Address
+            address = soup_about.find("div", class_="xzsf02u x6prxxf xvq8zen x126k92a x12nagc")
+            print(f"address is: {address}")
+            if address:
+                about_data["Address"] = address.get_text().strip()
 
+            # Extract Contact Information (Phone Number or URL)
+            contact_all = soup_about.find("div", class_="x9f619 x1n2onr6 x1ja2u2z x78zum5 xdt5ytf x193iq5w xeuugli x1r8uery x1iyjqo2 xs83m0k xamitd3 xsyo7zv x16hj40l x10b6aqq x1yrsyyn")
+            mobile_all = soup_about.find_next("div", class_="x9f619 x1n2onr6 x1ja2u2z x78zum5 xdt5ytf x193iq5w xeuugli x1r8uery x1iyjqo2 xs83m0k xamitd3 xsyo7zv x16hj40l x10b6aqq x1yrsyyn")
+            print(f"mobile_all: {mobile_all}")
+
+            if contact_all:
+                contact_element = contact_all.find_next("span", class_="x193iq5w xeuugli x13faqbe x1vvkbs x1xmvt09 x1lliihq x1s928wv xhkezso x1gmr53x x1cpjm7i x1fgarty x1943h6x xudqn12 x3x7a5m x6prxxf xvq8zen xo1l8bm xzsf02u x1yc453h")
+                
+                if contact_element:
+                    contact_value = contact_element.get_text().strip()
+                    print(f"Extracted Contact: {contact_value}")
+
+                    # Check if the extracted value is a URL
+                    if "http" in contact_value or contact_element.find("a"):
+                        website_url = contact_element.find("a")["href"] if contact_element.find("a") else contact_value
+
+                        # Handle Facebook redirect links
+                        if "l.facebook.com/l.php" in website_url:
+                            parsed_url = urlparse(website_url)
+                            query_params = parse_qs(parsed_url.query)
+                            if "u" in query_params:
+                                website_url = query_params["u"][0]
+
+                        # Decode URL
+                        website_url = unquote(website_url)
+                        about_data["Website"] = website_url
+                        print(f"✅ Website found and set: {website_url}")
+
+                    # Check if the value is a valid phone number (digits, spaces, dashes, or plus sign)
+                    elif re.match(r"^\+?\d[\d\s\-()]*$", contact_value):
+                        about_data["Contact"] = contact_value
+                        print(f"✅ Contact number found and set: {contact_value}")
+
+                    else:
+                        about_data["Address"] = contact_value  # Store as address if it's neither a URL nor a phone number
+                        print(f"✅ Address found and set: {contact_value}")
+                else:
+                    print("❌ No contact information found.")
+            else:
+                print("❌ No contact section found.")
+        except Exception as e:
+            print(f"⚠️ Error extracting About information: {e}")
+        
+        print(f"📌 Extracted 'About' Info: {about_data}")
+    else:
+        print("Skipping About extraction because 'About' tab is not available.")
+        about_data = {}
+
+    # Reviews
     review_data = []
     if navigate_to_tab(driver, "Reviews"):
+        time.sleep(3)
+        for _ in range(50):
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(SCROLL_PAUSE_TIME)
+        
+        def expand_reviews():
+            try:
+                while True:
+                    see_more_buttons = driver.find_elements(By.XPATH, "//div[contains(text(), 'See More')]")
+                    if not see_more_buttons:
+                        break
+                    for btn in see_more_buttons:
+                        driver.execute_script("arguments[0].click();", btn)
+                        time.sleep(2)
+            except Exception as e:
+                print(f"⚠️ Error expanding reviews: {e}")
+        
+        expand_reviews()
+        soup_reviews = BeautifulSoup(driver.page_source, "html.parser")
+        
+        new_reviews = []
         try:
-            reviews_soup = BeautifulSoup(driver.page_source, "html.parser")
-            review_containers = reviews_soup.find_all("div", {"role": "article"})
-            for r in review_containers:
-                user = r.find("strong")
-                text = r.get_text(separator=" ", strip=True)
-                if user:
-                    review_data.append({"User": user.get_text(strip=True), "Review": text})
+            review_full = soup_reviews.find_all("div", class_="html-div xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x78zum5 x1n2onr6 xh8yej3")
+            for review in review_full:
+                user_name_element = review.find_next("strong", class_="html-strong xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1hl2dhg x16tdsg8 x1vvkbs x1s688f")
+                user_name = user_name_element.get_text().strip() if user_name_element else "Unknown User"
+                review_text_element = review.find_next("span", class_="html-span xdj266r x11i5rnm xat24cr x1mh8g0r xexx8yu x4uap5 x18d9i69 xkhd6sd x1hl2dhg x16tdsg8 x1vvkbs xzsf02u xngnso2 xo1l8bm x1qb5hxa")
+                review_text = review_text_element.get_text().strip() if review_text_element else "No review text"
+                new_reviews.append({"User": user_name, "Review": review_text})
         except Exception as e:
-            print(f"⚠️ Error extracting Reviews: {e}")
+            print(f"⚠️ Error extracting reviews: {e}")
+        
+        all_reviews = new_reviews
+        
+        print(f"✅ Scraped {len(new_reviews)} new reviews. Total reviews saved: {len(all_reviews)}")
+    else:
+        print("Skipping Reviews extraction because 'Reviews' tab is not available.")
 
+    # Save combined
     driver.quit()
-    df = pd.DataFrame(scraped_posts)
     os.makedirs("data", exist_ok=True)
     identifier = extract_page_identifier(page_url)
     final_path = f"data/final_scraped_dataset_{identifier}.json"
     final_dataset = {
-        "About": about_text,
-        "Recommendation": "recommended" if "recommend" in about_text.lower() else "not recommended",
-        "Reviews": review_data,
+        "About": about_data,
+        "Recommendation": recommendation_text if isinstance(recommendation_text, str) else str(recommendation_text),
+        "Reviews": all_reviews,
         "Posts": scraped_posts
     }
     with open(final_path, "w", encoding="utf-8") as f:
         json.dump(final_dataset, f, indent=4, ensure_ascii=False)
     print(f"✅ Combined dataset saved to {final_path}")
 
-    return df
+    return pd.DataFrame(scraped_posts)

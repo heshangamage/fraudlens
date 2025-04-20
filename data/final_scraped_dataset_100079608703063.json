@@ -1,60 +1,96 @@
 {
-    "About": "",
-    "Recommendation": "not recommended",
-    "Reviews": [],
+    "About": {
+        "Address": "Dehiwela, Colombo, Sri Lanka, 10350",
+        "Contact": "077 522 7226"
+    },
+    "Recommendation": "96% recommend (571 reviews)﻿",
+    "Reviews": [
+        {
+            "User": "Rashmi Nimalika",
+            "Review": "Really good service... and best products i hv evr seen.. keep it up.. congrats.. �"
+        },
+        {
+            "User": "Rashmi Nimalika",
+            "Review": "Really good service... and best products i hv evr seen.. keep it up.. congrats.. �"
+        },
+        {
+            "User": "Rashmi Nimalika",
+            "Review": "Really good service... and best products i hv evr seen.. keep it up.. congrats.. �"
+        },
+        {
+            "User": "Saman Madu",
+            "Review": "No review text"
+        },
+        {
+            "User": "Amani Lunuwila",
+            "Review": "No review text"
+        },
+        {
+            "User": "Dhananjani Fernando",
+            "Review": "No review text"
+        },
+        {
+            "User": "Rebecca Nesamalar Moses",
+            "Review": "No review text"
+        },
+        {
+            "User": "Sanduni Dissanayake",
+            "Review": "No review text"
+        },
+        {
+            "User": "Hansi Abeyrathna",
+            "Review": "No review text"
+        },
+        {
+            "User": "Dharanee Dharmasena",
+            "Review": "No review text"
+        },
+        {
+            "User": "Shashikala Sewwandi",
+            "Review": "No review text"
+        },
+        {
+            "User": "Vindya Karunarathne",
+            "Review": "No review text"
+        }
+    ],
     "Posts": [
         {
-            "Post Content": "Unisex Batik Sarong … See more",
+            "Post Content": "Sale Sale  … See more",
             "Comments": [],
             "Reactions": {},
             "Timestamp": "Unknown"
         },
         {
-            "Post Content": "Unisex Batik Sarong … See more",
+            "Post Content": "Sale Sale  … See more",
             "Comments": [],
             "Reactions": {},
             "Timestamp": "Unknown"
         },
         {
-            "Post Content": "Unisex Batik Sarong … See more",
+            "Post Content": "Sale Sale  … See more",
             "Comments": [],
             "Reactions": {},
             "Timestamp": "Unknown"
         },
         {
-            "Post Content": "Unisex Batik Sarong … See more",
+            "Post Content": "Sale Sale  … See more",
             "Comments": [],
             "Reactions": {
-                "Like": 2
+                "Like": 8
             },
             "Timestamp": "Unknown"
         },
         {
-            "Post Content": "Maaza Floral long frock Rs 2490/- … See more",
+            "Post Content": "Happy Customer  Happy New Year",
             "Comments": [],
             "Reactions": {
-                "Like": 7
+                "Like": 3
             },
             "Timestamp": "Unknown"
         },
         {
-            "Post Content": "Free size kaftan for a gorgeous look… See more",
-            "Comments": [],
-            "Reactions": {},
-            "Timestamp": "Unknown"
-        },
-        {
-            "Post Content": "Lankan batik short Kaftan Rs 2690/- … See more",
-            "Comments": [
-                "Is this available in your shop?"
-            ],
-            "Reactions": {
-                "Like": 12
-            },
-            "Timestamp": "Unknown"
-        },
-        {
-            "Post Content": "Maaza short frock Rs 2490/- … See more",
+            "Post Content": "No Text",
             "Comments": [],
             "Reactions": {},
             "Timestamp": "Unknown"
