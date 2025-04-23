@@ -146,6 +146,10 @@ def scrape_facebook_page(page_url):
         except:
             pass
 
+        # Add fallback if still unknown
+        if timestamp == "Unknown":
+            timestamp = datetime.now().isoformat()
+
         scraped_posts.append({
             "Post Content": post_text,
             "Comments": comments,

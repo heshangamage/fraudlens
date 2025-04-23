@@ -1,0 +1,77 @@
+{
+    "About": {
+        "Address": "Colombo, Sri Lanka, 00900",
+        "Contact": "077 776 1361"
+    },
+    "Recommendation": "100% recommend (5 reviews)﻿",
+    "Reviews": [
+        {
+            "User": "Mohamed Irshad",
+            "Review": "No review text"
+        },
+        {
+            "User": "Mohamed Irshad",
+            "Review": "No review text"
+        },
+        {
+            "User": "Mohamed Irshad",
+            "Review": "No review text"
+        },
+        {
+            "User": "Mohamed Faisal Tahir",
+            "Review": "No review text"
+        },
+        {
+            "User": "Arshad Binali",
+            "Review": "No review text"
+        },
+        {
+            "User": "Zaneera Thariq",
+            "Review": "No review text"
+        },
+        {
+            "User": "Fathima Rinoza",
+            "Review": "No review text"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "May this Eid bring you peace, prosperity, and success in all your endeavours. Have a blessed Eid filled with happiness and joy. Eid Mubarak -",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-21T20:53:13.997816"
+        },
+        {
+            "Post Content": "May this Eid bring you peace, prosperity, and success in all your endeavours. Have a blessed Eid filled with happiness and joy. Eid Mubarak -",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-21T20:53:14.005338"
+        },
+        {
+            "Post Content": "May this Eid bring you peace, prosperity, and success in all your endeavours. Have a blessed Eid filled with happiness and joy. Eid Mubarak -",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-21T20:53:14.012345"
+        },
+        {
+            "Post Content": "May this Eid bring you peace, prosperity, and success in all your endeavours. Have a blessed Eid filled with happiness and joy. Eid Mubarak -",
+            "Comments": [],
+            "Reactions": {
+                "Like": 2
+            },
+            "Timestamp": "2025-04-21T20:53:14.025335"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-21T20:53:14.030335"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-21T20:53:14.032427"
+        }
+    ]
+}
