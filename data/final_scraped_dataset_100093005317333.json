@@ -1,0 +1,39 @@
+{
+    "About": {
+        "Address": "4056 Spokane St, Tacoma, WA , Tacoma, WA, United States, 98404",
+        "Contact": "+1 202-555-0489"
+    },
+    "Recommendation": "not available",
+    "Reviews": [
+        {
+            "User": "Unknown User",
+            "Review": "No review text"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T22:17:53.138556"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T22:17:53.152761"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T22:17:53.161488"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T22:17:53.180560"
+        }
+    ]
+}

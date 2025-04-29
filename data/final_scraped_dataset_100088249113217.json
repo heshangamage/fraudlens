@@ -1,0 +1,67 @@
+{
+    "About": {
+        "Address": "Colombo, Sri Lanka",
+        "Contact": "074 057 7826"
+    },
+    "Recommendation": "not available",
+    "Reviews": [
+        {
+            "User": "Unknown User",
+            "Review": "No review text"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "1350/-1350/-… See more",
+            "Comments": [
+                "Details"
+            ],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T21:01:52.488296"
+        },
+        {
+            "Post Content": "1350/-1350/-… See more",
+            "Comments": [
+                "Details"
+            ],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T21:01:52.515289"
+        },
+        {
+            "Post Content": "1350/-1350/-… See more",
+            "Comments": [
+                "Details"
+            ],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T21:01:52.531286"
+        },
+        {
+            "Post Content": "1350/-1350/-… See more",
+            "Comments": [
+                "Details"
+            ],
+            "Reactions": {
+                "Like": 132,
+                "Haha": 10
+            },
+            "Timestamp": "2025-04-29T21:01:52.560832"
+        },
+        {
+            "Post Content": "1350/-1350/-… See more",
+            "Comments": [
+                "Dehiowitatata diliwari keeyada"
+            ],
+            "Reactions": {
+                "Like": 27,
+                "Haha": 4
+            },
+            "Timestamp": "2025-04-29T21:01:52.588176"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T21:01:52.619181"
+        }
+    ]
+}

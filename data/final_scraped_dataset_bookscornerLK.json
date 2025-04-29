@@ -1,0 +1,80 @@
+{
+    "About": {
+        "Address": "Kotte, Sri Lanka",
+        "Contact": "078 910 2974"
+    },
+    "Recommendation": "100% recommend (13 reviews)﻿",
+    "Reviews": [
+        {
+            "User": "Rasika Kumari",
+            "Review": "No review text"
+        },
+        {
+            "User": "Rasika Kumari",
+            "Review": "No review text"
+        },
+        {
+            "User": "Rasika Kumari",
+            "Review": "No review text"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.703180"
+        },
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.722187"
+        },
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.738185"
+        },
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.757193"
+        },
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.766221"
+        },
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.775220"
+        },
+        {
+            "Post Content": "",
+            "Comments": [],
+            "Reactions": {
+                "Like": 20,
+                "Love": 4
+            },
+            "Timestamp": "2025-04-28T23:23:32.790220"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.794220"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:23:32.797221"
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "About": {
+        "Address": "221- Sri Jayawardenapura Rd, , Rajagiriya, Sri Lanka, 10107",
+        "Contact": "077 936 6647"
+    },
+    "Recommendation": "96% recommend (69 reviews)﻿",
+    "Reviews": [
+        {
+            "User": "Anjali Silva",
+            "Review": "No review text"
+        },
+        {
+            "User": "Anjali Silva",
+            "Review": "No review text"
+        },
+        {
+            "User": "Anjali Silva",
+            "Review": "No review text"
+        },
+        {
+            "User": "Unknown User",
+            "Review": "No review text"
+        },
+        {
+            "User": "Unknown User",
+            "Review": "No review text"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "Dinithi & Sangeeth… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:03:41.417820"
+        },
+        {
+            "Post Content": "Dinithi & Sangeeth… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:03:41.427849"
+        },
+        {
+            "Post Content": "Dinithi & Sangeeth… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:03:41.434352"
+        },
+        {
+            "Post Content": "Dinithi & Sangeeth… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:03:41.439362"
+        },
+        {
+            "Post Content": "Dinithi & Sangeeth… See more",
+            "Comments": [],
+            "Reactions": {
+                "Like": 24,
+                "Love": 12
+            },
+            "Timestamp": "2025-04-30T00:03:41.447873"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:03:41.449874"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:03:41.450874"
+        }
+    ]
+}

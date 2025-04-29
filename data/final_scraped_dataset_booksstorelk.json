@@ -1,0 +1,77 @@
+{
+    "About": {
+        "Address": "424A, Old Kottawa Road, Udahamulla, Nugegoda, Sri Lanka, 10250",
+        "Contact": "077 386 3303"
+    },
+    "Recommendation": "not available",
+    "Reviews": [
+        {
+            "User": "Shaan Mohammath",
+            "Review": "The crab with the golden claws"
+        },
+        {
+            "User": "Shaan Mohammath",
+            "Review": "The crab with the golden claws"
+        },
+        {
+            "User": "Shaan Mohammath",
+            "Review": "The crab with the golden claws"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "Atlas Sri Lanka's leading stationery manufacturer. ඇට්ලස් චූට්, දක්ෂයන්ට පමණයි!",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:08:12.562024"
+        },
+        {
+            "Post Content": "Atlas Sri Lanka's leading stationery manufacturer. ඇට්ලස් චූට්, දක්ෂයන්ට පමණයි!",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:08:12.568938"
+        },
+        {
+            "Post Content": "Atlas Sri Lanka's leading stationery manufacturer. ඇට්ලස් චූට්, දක්ෂයන්ට පමණයි!",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:08:12.577939"
+        },
+        {
+            "Post Content": "Atlas Sri Lanka's leading stationery manufacturer. ඇට්ලස් චූට්, දක්ෂයන්ට පමණයි!",
+            "Comments": [],
+            "Reactions": {
+                "Like": 2
+            },
+            "Timestamp": "2025-04-28T23:08:12.588130"
+        },
+        {
+            "Post Content": "A place for quality books and stationery - Opening soon",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:08:12.595720"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-28T23:08:12.610799"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {
+                "Like": 1
+            },
+            "Timestamp": "2025-04-28T23:08:12.622802"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {
+                "Like": 1
+            },
+            "Timestamp": "2025-04-28T23:08:12.632895"
+        }
+    ]
+}

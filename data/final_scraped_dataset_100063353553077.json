@@ -1,0 +1,66 @@
+{
+    "About": {
+        "Address": "Dickson Peiris Mw\n, Colombo, Sri Lanka, 10400",
+        "Contact": "077 683 4587"
+    },
+    "Recommendation": "not available",
+    "Reviews": [
+        {
+            "User": "Unknown User",
+            "Review": "No review text"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "Mama hadana slippers walata comment denna pls",
+            "Comments": [
+                "Prise plz"
+            ],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:09:27.163190"
+        },
+        {
+            "Post Content": "Mama hadana slippers walata comment denna pls",
+            "Comments": [
+                "Prise plz"
+            ],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:09:27.190506"
+        },
+        {
+            "Post Content": "Mama hadana slippers walata comment denna pls",
+            "Comments": [
+                "Prise plz"
+            ],
+            "Reactions": {},
+            "Timestamp": "2025-04-30T00:09:27.219178"
+        },
+        {
+            "Post Content": "Mama hadana slippers walata comment denna pls",
+            "Comments": [
+                "Prise plz"
+            ],
+            "Reactions": {
+                "Like": 11
+            },
+            "Timestamp": "2025-04-30T00:09:27.247046"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {
+                "Like": 5,
+                "Love": 1
+            },
+            "Timestamp": "2025-04-30T00:09:27.277646"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {
+                "Like": 2
+            },
+            "Timestamp": "2025-04-30T00:09:27.298107"
+        }
+    ]
+}

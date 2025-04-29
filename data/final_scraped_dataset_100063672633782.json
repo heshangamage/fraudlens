@@ -1,0 +1,85 @@
+{
+    "About": {
+        "Address": "88 Willorawatta Moratuwa, Colombo, Sri Lanka",
+        "Contact": "077 648 0194"
+    },
+    "Recommendation": "not available",
+    "Reviews": [
+        {
+            "User": "Chathurika Jayasinghe",
+            "Review": "Very happy about your quality of the product and fast delivery"
+        },
+        {
+            "User": "Chathurika Jayasinghe",
+            "Review": "Very happy about your quality of the product and fast delivery"
+        },
+        {
+            "User": "Chathurika Jayasinghe",
+            "Review": "Very happy about your quality of the product and fast delivery"
+        },
+        {
+            "User": "Prabhath Manjula",
+            "Review": "Very happy about your quality of the product and fast delivery"
+        },
+        {
+            "User": "Ayesh Fernando",
+            "Review": "Write  Things  Write Place"
+        },
+        {
+            "User": "Sulakshana Fernando",
+            "Review": "Write  Things  Write Place"
+        }
+    ],
+    "Posts": [
+        {
+            "Post Content": "CREATE YOUR DREAM FURNITURE WITH USTEA… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.862573"
+        },
+        {
+            "Post Content": "CREATE YOUR DREAM FURNITURE WITH USTEA… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.881679"
+        },
+        {
+            "Post Content": "CREATE YOUR DREAM FURNITURE WITH USTEA… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.897783"
+        },
+        {
+            "Post Content": "CREATE YOUR DREAM FURNITURE WITH USTEA… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.903686"
+        },
+        {
+            "Post Content": "CREATE YOUR DREAM FURNITURE WITH USTEA… See more",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.910691"
+        },
+        {
+            "Post Content": "CREATE YOUR DREAM FURNITURE WITH USTEA… See more",
+            "Comments": [],
+            "Reactions": {
+                "Love": 9
+            },
+            "Timestamp": "2025-04-29T01:56:04.925681"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.930379"
+        },
+        {
+            "Post Content": "No Text",
+            "Comments": [],
+            "Reactions": {},
+            "Timestamp": "2025-04-29T01:56:04.934506"
+        }
+    ]
+}
