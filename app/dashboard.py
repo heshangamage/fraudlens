@@ -1,5 +1,4 @@
-# dashboard.py (Updated to dynamically match JSON filename from URL)
-
+# dashboard.py (Updated to use trained models)
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -7,16 +6,21 @@ import json
 import os
 import re
 import altair as alt
+import joblib
+
 from scraper import scrape_facebook_page, extract_page_identifier
-from sklearn.ensemble import IsolationForest
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
+from sentence_transformers import SentenceTransformer
+
+# Load pretrained models
+sbert_model = SentenceTransformer("./fine_tuned_sbert_fraudlens/")
+tfidf = joblib.load("tfidf_vectorizer.pkl")
+sbert_clf = joblib.load("logistic_model_sbert.pkl")
+anomaly_model = joblib.load("isolation_model.pkl")
 
 st.set_page_config(page_title="Facebook Page Fraud Detection with FraudLens", layout="wide")
 st.title("🔐 Facebook Page Fraud Detection with FraudLens")
 
 def clean_text(text):
-    import re
     text = text.lower()
     text = re.sub(r'… see more', '', text)
     text = re.sub(r'http\S+', '', text)
@@ -34,46 +38,32 @@ def preprocess(df):
     df['Love Ratio'] = df['Reactions'].apply(lambda x: x.get('Love', 0) / sum(x.values()) if sum(x.values()) > 0 else 0)
     return df
 
-def fraudlens_pipeline(df, reviews):
-    tfidf = TfidfVectorizer(max_features=100)
-    X_reviews = tfidf.fit_transform(reviews + df['Cleaned Content'].tolist())
-    dummy_labels = [0] * len(reviews) + [1] * len(df)
-    clf_text = LogisticRegression().fit(X_reviews, dummy_labels)
-    X_text = tfidf.transform(df['Cleaned Content'])
-    df['Text_Prob'] = clf_text.predict_proba(X_text)[:, 1]
+def fraudlens_pipeline(df):
+    # SBERT embedding
+    sbert_embeddings = sbert_model.encode(df['Cleaned Content'].tolist(), show_progress_bar=False)
+    sbert_df = pd.DataFrame(sbert_embeddings, columns=[f'sbert_{i}' for i in range(sbert_embeddings.shape[1])])
+    df = pd.concat([df.reset_index(drop=True), sbert_df.reset_index(drop=True)], axis=1)
 
+    # Predict SBERT_Prob
+    df['SBERT_Prob'] = sbert_clf.predict_proba(sbert_df)[:, 1]
+
+    # Anomaly score
     features = ['Post Length', 'Num Comments', 'Total Reactions', 'Angry Ratio', 'Sad Ratio', 'Haha Ratio', 'Love Ratio']
     X_behavior = df[features].fillna(0)
-    anomaly_model = IsolationForest(contamination=0.25, random_state=42)
-    df['Anomaly_Score'] = -anomaly_model.fit(X_behavior).decision_function(X_behavior)
+    df['Anomaly_Score'] = -anomaly_model.decision_function(X_behavior)
 
-    np.random.seed(42)
-    df['Trust_Score'] = np.random.uniform(0.5, 1.0, len(df))
+    # Trust score
+    df['Trust_Score'] = (
+        0.6 * df['Love Ratio'] + 
+        0.2 * df['Haha Ratio'] + 
+        0.1 * (df['Post Length'] / df['Post Length'].max()) + 
+        0.1 * (1 - df['Angry Ratio'])
+    ).clip(0.4, 1.0)
 
-    df['FraudLens_Score'] = 0.4 * df['Text_Prob'] + 0.4 * df['Anomaly_Score'] + 0.2 * (1 - df['Trust_Score'])
-    df['Fraud_Prediction'] = df['FraudLens_Score'].apply(lambda x: 1 if x > 0.5 else 0)
+    # Final score and prediction
+    df['FraudLens_Score'] = 0.4 * df['SBERT_Prob'] + 0.4 * df['Anomaly_Score'] + 0.2 * (1 - df['Trust_Score'])
+    df['Fraud_Prediction'] = df['FraudLens_Score'].apply(lambda x: 1 if x > 0.3 else 0)
     return df
-
-def load_reviews_from_json(json_path):
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    reviews = []
-    for r in data.get("Reviews", []):
-        review = r.get("Review")
-        if isinstance(review, str) and review.lower() != "no review text":
-            reviews.append(review)
-
-    # Safely append About and Recommendation only if they're strings
-    about = data.get("About")
-    if isinstance(about, str):
-        reviews.append(about)
-
-    recommendation = data.get("Recommendation")
-    if isinstance(recommendation, str):
-        reviews.append(recommendation)
-
-    return reviews
 
 url = st.text_input("Paste a Facebook Page URL to scan:")
 
@@ -88,10 +78,10 @@ if st.button("Load and Analyze") and url:
     if os.path.exists(json_path):
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
+
         df = pd.DataFrame(data.get("Posts", []))
         df = preprocess(df)
-        reviews = load_reviews_from_json(json_path)
-        results = fraudlens_pipeline(df, reviews)
+        results = fraudlens_pipeline(df)
 
         st.metric("Total Posts Analyzed", len(results))
         st.metric("Posts Flagged as Fraud", int(results['Fraud_Prediction'].sum()))
@@ -121,15 +111,12 @@ if st.button("Load and Analyze") and url:
         trust_chart = alt.Chart(results).mark_bar().encode(
             x=alt.X('Trust_Score', bin=alt.Bin(maxbins=20), title="Trust Score"),
             y=alt.Y('count()', title="Number of Posts")
-        ).properties(
-            width=600,
-            height=300
-        )
+        ).properties(width=600, height=300)
         st.altair_chart(trust_chart)
 
         st.subheader("📊 Suspicious Post Table")
         st.dataframe(results[results['Fraud_Prediction'] == 1][[
-            'Post Content', 'Text_Prob', 'Anomaly_Score', 'Trust_Score', 'FraudLens_Score', 'Timestamp'
+            'Post Content', 'SBERT_Prob', 'Anomaly_Score', 'Trust_Score', 'FraudLens_Score'
         ]])
 
         st.subheader("🧠 All Posts and Scores")
